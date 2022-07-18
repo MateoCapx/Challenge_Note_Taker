@@ -25,6 +25,7 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
+// The fetch calls allows  apiRoutes to communite with sandbox.js file.
 const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
@@ -118,9 +119,11 @@ const handleRenderSaveBtn = () => {
 
 // Render the list of note titles
 const renderNoteList = async (notes) => {
+  console.log(notes)
   let jsonNotes = await notes.json();
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
+    
   }
 
   let noteListItems = [];

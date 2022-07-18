@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3001;
 // Set up body parsing, static, and route middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public')); // Tells express to server the front code from the public folder
+app.use(express.static('public')); // Tells express to server the frontend code from the public folder
 app.use('/api', apiRoutes);
 app.use('/', htmlRoutes);
 
