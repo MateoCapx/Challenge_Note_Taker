@@ -21,11 +21,35 @@ router.get("/notes", (req, res) => {
   });
 
 
-  router.post('/notes',(request,response)=>{
+  let testObject =
+  [
+    {
+        "id": 2,
+        "title":"Learn SQL",
+        "text":"SQL Rocks"
+    }
+]
 
-    
+  router.post('/notes',(request,response)=>{
+    console.log(request.body);
+    fs.writeFile("db.json", JSON.stringify.push(testObject) , function(err, data) {
+        // data = [].concat(JSON.stringify(data))
+      if(err){
+          console.log(`Error: ${err}`)
+      }
   })
+    response.send(201)
+  });
+
+
 module.exports = router;
 
 
 
+// [
+// 	{
+// 		"id": 2,
+// 		"title": " Devin Haney",
+// 		"text": "Welterweight"
+// 	}
+// ]
