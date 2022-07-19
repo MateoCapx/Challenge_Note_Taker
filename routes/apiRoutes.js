@@ -39,26 +39,31 @@ router.post('/notes', (request, response) => {
 })
 
 router.delete('/notes/:id', (request, response) => {
-    console.log(request.params.id);
+    console.log("Request Parameter", request.params.id);
+
+
+    const { id } = request.params;
+
+    
+     let deleted = notes.filter(notes => notes.id != id)
+
+    for (let deleted = 0; deleted < deleted.length; deleted++) {
+        console.log(deleted)
+        
+    }
+
+
+
+    console.log('Deleted:', deleted)
+
 
     fs.readFile("db.json", "utf8", function (err, data) {
         data = [].concat(JSON.parse(data))
 
-
-        let readingFile = data
-        console.log("Read File Data", readingFile)
-
-        readingFile.filter(function(value){
-            return request.params.id;
-
-        })
-
     })
 
 
-
-
-    fs.writeFile("db.json", JSON.stringify(notes), function (err, data) {
+    fs.writeFile("db.json", JSON.stringify(deleted), function (err, data) {
         //  data = [].concat(JSON.stringify(data))
         if (err) {
             console.log(`Error: ${err}`)
