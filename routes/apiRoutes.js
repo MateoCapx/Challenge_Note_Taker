@@ -27,24 +27,47 @@ router.post('/notes', (request, response) => {
 
     console.log(request.body);
     console.log(notes);
-    
-        fs.writeFile("db.json", JSON.stringify(notes), function (err, data) {
-            //  data = [].concat(JSON.stringify(data))
-            if (err) {
-                console.log(`Error: ${err}`)
-            }
+
+    fs.writeFile("db.json", JSON.stringify(notes), function (err, data) {
+        //  data = [].concat(JSON.stringify(data))
+        if (err) {
+            console.log(`Error: ${err}`)
+        }
+
+    })
+
+})
+
+router.delete('/notes/:id', (request, response) => {
+    console.log(request.params.id);
+
+    fs.readFile("db.json", "utf8", function (err, data) {
+        data = [].concat(JSON.parse(data))
+
+
+        let readingFile = data
+        console.log("Read File Data", readingFile)
+
+        readingFile.filter(function(value){
+            return request.params.id;
 
         })
 
     })
 
-router.delete('/notes/:id', (request,response) => {
-   console.log(request.params.id);
 
+
+
+    fs.writeFile("db.json", JSON.stringify(notes), function (err, data) {
+        //  data = [].concat(JSON.stringify(data))
+        if (err) {
+            console.log(`Error: ${err}`)
+        }
+
+    })
     response.send(200);
+
 })
-
-
 
 module.exports = router;
 
