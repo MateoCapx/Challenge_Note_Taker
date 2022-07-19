@@ -6,6 +6,7 @@ const path = require('path')
 
 const router = Router();
 
+
 router.get("/notes", (req, res) => {
     //'fs' to read file from db folder where users data is saved
     fs.readFile("db.json", "utf8", function (err, data) {
@@ -19,44 +20,33 @@ router.get("/notes", (req, res) => {
 });
 
 
-// let testObject =
-// {
-//     "id": 2,
-//     "title": "Learn SQL",
-//     "text": "SQL Rocks"
-// }
-
-
 router.post('/notes', (request, response) => {
-    console.log(request.body);
-    fs.readFile("db.json", "utf8", function (err, data) {
-        data = [].concat(JSON.parse(data))
-        console.log("My Log:", data)
-        // data.push(data)
+    let newNote = request.body;
+    newNote.id = notes.length; // increments the notes by 1 - Allows up to automatically give and id number
+    notes.push(newNote)
 
-        fs.writeFile("db.json", JSON.stringify(request), function (err, data) {
+    console.log(request.body);
+    console.log(notes);
+    
+        fs.writeFile("db.json", JSON.stringify(notes), function (err, data) {
             //  data = [].concat(JSON.stringify(data))
             if (err) {
                 console.log(`Error: ${err}`)
             }
-           
+
         })
 
     })
 
+router.delete('/notes/:id', (request,response) => {
+   console.log(request.params.id);
 
-    response.send(201)
-});
+    response.send(200);
+})
+
 
 
 module.exports = router;
 
 
 
-// [
-// 	{
-// 		"id": 2,
-// 		"title": " Devin Haney",
-// 		"text": "Welterweight"
-// 	}
-// ]
