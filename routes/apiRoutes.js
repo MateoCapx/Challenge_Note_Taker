@@ -43,7 +43,8 @@ router.delete('/notes/:id', (request, response) => {
 
 
     const { id } = request.params;
-    notes = notes.filter(notes => notes.id != id)
+
+      notes = notes.filter(notes => notes.id != id)
 
     fs.readFile("db.json", "utf8", function (err, data) {
         data = [].concat(JSON.parse(data))

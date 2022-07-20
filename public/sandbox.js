@@ -78,6 +78,8 @@ const handleNoteSave = () => {
   });
 };
 
+console.log(noteTitle) 
+
 // Delete the clicked note
 const handleNoteDelete = (e) => {
   // Prevents the click listener for the list from being called when the button inside of it is clicked
@@ -182,5 +184,6 @@ if (window.location.pathname === '/notes') {
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
 }
+
 
 getAndRenderNotes();
