@@ -1,6 +1,6 @@
 const { Router, response } = require('express');
 const fs = require('fs');
-const notes = require('../db.json')
+let notes = require('../db.json')
 const path = require('path')
 
 
@@ -43,19 +43,7 @@ router.delete('/notes/:id', (request, response) => {
 
 
     const { id } = request.params;
-
-    
-     let deleted = notes.filter(notes => notes.id != id)
-
-    for (let deleted = 0; deleted < deleted.length; deleted++) {
-        console.log(deleted)
-        
-    }
-
-
-
-    console.log('Deleted:', deleted)
-
+    notes = notes.filter(notes => notes.id != id)
 
     fs.readFile("db.json", "utf8", function (err, data) {
         data = [].concat(JSON.parse(data))
@@ -63,7 +51,7 @@ router.delete('/notes/:id', (request, response) => {
     })
 
 
-    fs.writeFile("db.json", JSON.stringify(deleted), function (err, data) {
+    fs.writeFile("db.json", JSON.stringify(notes), function (err, data) {
         //  data = [].concat(JSON.stringify(data))
         if (err) {
             console.log(`Error: ${err}`)
